@@ -1,0 +1,44 @@
+\documentclass{scrreprt}
+
+
+\usepackage[ngerman]{babel}
+\usepackage[ansinew]{inputenc}
+\usepackage[T1]{fontenc}
+%ppl palatino
+\fontfamily{ppl}
+\fontseries{m}
+\fontshape{n}
+\selectfont
+
+\usepackage{amsmath}
+\usepackage[numbers]{natbib}
+\usepackage{graphicx}
+\usepackage[printonlyused,withpage]{acronym}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{color}
+ %\usepackage[cmyk]{xcolor}   %für druckausgabe
+ 
+\usepackage{pdfpages}
+\usepackage{multicol}
+\usepackage[pdftex,
+ pdfauthor=\ersteller,
+ pdftitle={\arbeit},
+ pdfsubject={\thema},
+ pdfkeywords={\keywords},
+ pdfcreator=pdflatex]{hyperref}
+ 
+\input{config/listing-settings}
+
+%\pagestyle{headings}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[EL]{\thepage} %Seitennummer
+\fancyhead[OR]{\thepage} %Seitennummer
+
+\fancyhead[ER]{\rightmark}
+\fancyhead[OL]{\rightmark}
