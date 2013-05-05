@@ -1,0 +1,21 @@
+<html>
+<head>
+</head>
+
+<body>
+<button onclick="this.innerHTML = parseInt(this.innerHTML) + 1">1</button>
+<script "text/javascript">
+
+$(document).ready(
+    model_counter = new ModelCounter()
+    view_counter = new ViewCounterButton('model_counter': model_counter)
+    $('body').append(view_counter.render(),
+                     view_counter.render())
+)
+
+
+
+</script>
+</body>
+
+</html>
