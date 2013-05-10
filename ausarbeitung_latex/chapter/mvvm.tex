@@ -1,28 +1,31 @@
-\section{\acs{WPF} und \acs{MVVM}-Entwurfsmuster}
-\subsection{\acs{WPF}}
-Mit .NET Framework 3.0 wurde \acs{WPF} als Programmierschnittstelle für Windows Anwendungen eingeführt.
-Das rendern und zeichnen von Inhalten basiert auf DirectX, es ermöglicht den
-Entwicklern und GUI-Designern die Erstellung von optisch sehr ansehnlichen Benutzeroberflächen, bei gleichzeitig geringer Belastung der CPU.
-In Gegensatz zur altbekannten WinForm-API trennt die \acs{WPF} die Präsentations- und Geschäftslogik nach strengen Richtlinien.
-Während die Geschäftslogik in Programmcode geschrieben ist, wird die Präsentation mittels der Auszeichnungssprache XAML deklariert.
-XAML ist wie der Name schon impliziert an XML angelehnt.
+\section{WPF und MVVM-Entwurfsmuster}
+Zum besseren verstehen des \ac{MVVM} wird im folgenden Abschnitt zuerst das Grundprinzip von \ac{WPF} erklärt um folgend auf das eigentliche Thema \ac{MVVM} überzugehen.
+\subsection{WPF}
+Mit .NET Framework 3.0 wurde \ac{WPF} als Grafikframework für Windows Anwendungen eingeführt.
+Das rendern und zeichnen von Inhalten findet mittels DirectX auf der \ac{GPU} statt und ermöglicht es den
+ GUI-Designern die Erstellung von optisch sehr ansehnlichen Benutzeroberflächen, bei gleichzeitig Entlastung der \ac{CPU}.
+In Gegensatz zur altbekannten WinForm-API trennt die \ac{WPF} die Präsentations- und Geschäftslogik nach strengen Richtlinien.
+Während die Geschäftslogik in Programmcode geschrieben ist, wird die Präsentation mittels der Auszeichnungssprache \ac{XAML} deklariert.
+\ac{XAML} ist wie der Name schon impliziert an XML angelehnt (siehe \ref{Beispiel XAML}). 
+Wohingegen die Idee eine Auszeichnungssprache als Metasprache für die Benutzeroberfläche zu verwenden schon von HTML bekannt ist.
 
-Die wichtigsten Eigenschaften einer \acs{WPF}-Anwendung im Überblick:
+\quellcode{Beispiel XAML}{Beispiel XAML}{xml}{chapter/xaml.xml}
+
+Die wichtigsten Eigenschaften einer \ac{WPF}-Anwendung im Überblick:
 \begin{itemize}
-\item Design mit der Auszeichnungssprache XAML, alternativ auch ausprogrammiert möglich.
+\item Design mit der Auszeichnungssprache \ac{XAML}, alternativ auch ausprogrammiert möglich.
 \item Unterstützung von 2D und 3D Grafiken
 \item Die Ausgabe ist vektorbasiert anstatt pixelbasiert. Daraus erfolgt eine bessere Skalierbarkeit der Bildschirmausgabe.
 \item Vielfältige Datenbindungsmöglichkeiten
-\item Grafikberechnungen auf der GPU anstatt CPU
+\item Grafikberechnungen auf der GPU anstatt \ac{CPU}
 \end{itemize}
 Die strikte Trennung von Oberflächengestaltung und Code ermöglicht es, dass Programmentwickler und Oberflächendesigner vollkommen unabhängig voneinander Code und Benutzeroberfläche entwickeln können.
 
-\subsection{\acs{MVVM}}
-Das \acs{MVVM} Entwurfsmuster wurde bei Microsoft von John Gossman als Variante des \acs{MVP} Entwurfsmuster auf seinem Blog vorgestellt.
-Hintergrund war die Entwicklung moderner UIs, wie der \acs{WPF} und Silverlight jeweils von Microsoft, mit seinen neuen Möglichkeiten zur Erstellung von Benutzeroberflächen.
-Es gibt viele Vorteile durch das Pattern, allerdings erhöht es auch die Komplexität einer Anwendung. 
-In besonders großen Anwendungen ist das \acs{MVVM} sinnvoll, in kleiner Anwendungen, ist es aufgrund des Overheads nicht wirklich zu empfehlen.
-Die Abkürzung \acs{MVVM} steht wie bei \acs{MVC} und \acs{MVP} für die Komponenten des Entwurfsmusters (Siehe Abbildung \ref{MVVM-Entwurfsmuster}\label{Entwurfsmuster}).
+\subsection{MVVM}
+Das \ac{MVVM} Entwurfsmuster wurde von John Gossman als Variante des \ac{MVP} Entwurfsmuster auf seinem Blog vorgestellt.
+Hintergrund war die fortschreitende Entwicklung moderner Benutzerinterface-Frameworks, wie \ac{WPF} und Silverlight von Microsoft.
+In besonders großen Anwendungen ist das \ac{MVVM} sinnvoll, in kleiner Anwendungen, ist es aufgrund des Overheads nicht wirklich zu empfehlen.
+Die Abkürzung \ac{MVVM} steht wie bei \ac{MVC} und \ac{MVP} für die Komponenten des Entwurfsmusters (Siehe Abbildung \ref{MVVM-Entwurfsmuster}\label{Entwurfsmuster}).
 Die Langform Model View ViewModel ist auf den ersten Blick ungewöhnlich und bedarf der Erklärung.
 \begin{itemize}
 \item Model: Datenzugriffsschicht für die Inhalte, dem Benutzer angezeigt und von ihm manipuliert werden. 
@@ -33,12 +36,12 @@ Durch die Datenbindung ist die View einfach austauschbar und ihr Code-Behind ger
 Einerseits tauscht es Information mit dem Model aus, ruft also Methoden oder Dienste auf. Andererseits stellt es der View öffentliche Eigenschaften und Befehle zur Verfügung. 
 Diese werden von der View an Steuerelemente gebunden, um Inhalte auszugeben bzw. UI-Ereignisse weiterzuleiten. Insgesamt wird CRUD ermöglicht. Das ViewModel darf dabei keinerlei Kenntnis der View besitzen.
 \end{itemize}
-Die vom \acs{MVVM} genutzte funktionale Trennung und Datenbindung des \acs{MVC} wird dazu genutzt, die bereits beschriebene lose Kopplung zu erreichen.
-Diese ist jedoch im \acs{MVVM} um einiges stärker verwirklicht als in \acs{MVC} und \acs{MVP}. 
-Ein Vorteil des \acs{MVVM} in der Entwicklung von Anwendungen ist zudem die bessere Einbindung der UI-Logik in Unit Tests.
-Aufgrund der Tatsache, dass Sie beim \acs{MVVM} die Logik und das Command in der ViewModel-Klasse haben möchten, haben sich bei diesem Entwurfsmuster Commands wie das ActionCommand gegenüber den RoutedCommands durchgesetzt.
+Die vom \ac{MVVM} genutzte funktionale Trennung und Datenbindung des \ac{MVC} wird dazu genutzt, die bereits beschriebene lose Kopplung zu erreichen.
+Diese ist jedoch im \ac{MVVM} um einiges stärker verwirklicht als in \ac{MVC} und \ac{MVP}. 
+Ein Vorteil des \ac{MVVM} in der Entwicklung von Anwendungen ist zudem die bessere Einbindung der UI-Logik in Unit Tests.
+Aufgrund der Tatsache, dass Sie beim \ac{MVVM} die Logik und das Command in der ViewModel-Klasse haben möchten, haben sich bei diesem Entwurfsmuster Commands wie das ActionCommand gegenüber den RoutedCommands durchgesetzt.
 Ein ActionCommand erlaubt beim Instanziieren direkt die Angabe eines Delegates, der auf eine Methode im ViewModel zeigen kann.
-\acs{MVVM} in Verbindung mit \acs{WPF} verwendet üblicherweise eine Implementierung mit Delegates basierend auf ICommand-Interfaces. 
+\ac{MVVM} in Verbindung mit \ac{WPF} verwendet üblicherweise eine Implementierung mit Delegates basierend auf ICommand-Interfaces. 
 \bild{0.5}{MVVM.png}{MVVM-Entwurfsmuster}{MVVM-Entwurfsmuster}
 
 \section{Problem}
