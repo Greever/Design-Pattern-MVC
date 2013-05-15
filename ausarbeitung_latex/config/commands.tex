@@ -2,9 +2,9 @@
 
 \newcommand{\leerseite}[0]{\newpage\thispagestyle{empty}\hspace{1em}\newpage}
 \newcommand{\quellcode}[4]{ \vspace{0.5cm}
-	\lstinputlisting[caption={#1} \label{lst:#2},language=#3]{#4}
+	\lstinputlisting[caption={#1},label={#2},language=#3]{#4}
 	\vspace{0.5cm}
 }
 
-\newcommand{\bild}[4]{\begin{figure}[ht] \centering \includegraphics[width=#1\textwidth]{figure/#2}\caption{#3}\label{#4}\end{figure}
+\newcommand{\bild}[4]{\vspace{2cm} \begin{figure}[ht] \centering \includegraphics[width=#1\textwidth]{figure/#2}\caption{#3}\label{#4}\end{figure}
 }
