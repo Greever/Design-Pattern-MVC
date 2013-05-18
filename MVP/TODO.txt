@@ -1,15 +1,8 @@
 Ausarbeitung: 
 
-Noch Listeners als Observer_Pattern_Implementierung aufführen 
-Vor und Nachteile zu MVP noch nennen
-Betonen, dass Listener Abhängigkeiten weggelassen wurden (Klassendiagramme)
-Test(Mock)-Objekte noch erwähnen.
-Martin Fowler noch erwähnen 
-Rahmen Bilder noch mal durchschauen 
-Java-Listing einfügen 
+
 
 Code:
-Prüfen auf Kommentare und Bezeichnungen 
 
 Präsentation: 
 konkretes Beispiel noch einfügen 
@@ -17,3 +10,4 @@ konkretes Beispiel noch einfügen
 
 + altes Fernglas 
 + blaues T-Shirt
+

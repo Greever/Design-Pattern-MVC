@@ -14,7 +14,7 @@ public interface IWalletView {
     /*
      *@brief set Listener for changes in Model
      */
-    public void setMoneyListener(ChangeListener _e);
+    public void setMoneyListener(ChangeListener e_ref);
     public int  getMoneyFromView();
     public void setMoneyToView(double inputMoney);
     

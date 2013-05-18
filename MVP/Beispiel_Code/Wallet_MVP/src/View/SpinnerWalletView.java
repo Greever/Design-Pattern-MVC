@@ -107,8 +107,8 @@ public class SpinnerWalletView extends javax.swing.JFrame implements IWalletView
      *@brief set Listener for changes in Model
      */
     @Override
-    public void setMoneyListener(ChangeListener _e) {
-        this.walletValue_Spinner.addChangeListener(_e);
+    public void setMoneyListener(ChangeListener e_ref) {
+        this.walletValue_Spinner.addChangeListener(e_ref);
     }
 
 }

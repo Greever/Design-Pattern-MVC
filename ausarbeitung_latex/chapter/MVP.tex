@@ -4,7 +4,26 @@
 
 MVP stellt eine Weiterentwicklung von MVC dar. Da die Komponenten in MVC nicht in jedem aktuellen Anwendungsgebiet eindeutig definiert werden können und der Übergang der Komponenten teilweise fließend erfolgt, ist eine Erneuerung/Verbesserung der Grundidee dieses Patterns notwendig gewesen.
 \\ \\
-Model-View-Presenter wurde in den 90er-Jahren von Taligant und IBM entwickelt. Das Ziel war die generalisierung des in Smalltalk implementierten MVC-Patterns. Es sollte die Anforderungen für aktuellere Programmiersprachen, wie beispielsweise Java oder C++ erfüllen. Allgemein gehalten gibt es für MVP leider keine exakte Definition. Die konkrete Implementierung von MVP hängt vom Anwendungsfall und der verwendeten Programmiersprache ab. 
+Model-View-Presenter wurde in den 90er-Jahren von Taligant und IBM entwickelt. Martin Fowler formulierte jedoch im Jahre 2004 Model-View-Presenter nach seinem Verständnis. Seine Definition ist heute ausschlaggebend. Das Ziel war die generalisierung des in Smalltalk implementierten MVC-Patterns. Es sollte die Anforderungen für aktuellere Programmiersprachen, wie beispielsweise Java oder C++ erfüllen. Allgemein gehalten gibt es für MVP leider keine exakte Definition. Die konkrete Implementierung von MVP hängt vom Anwendungsfall und der verwendeten Programmiersprache ab. 
+\\ \\
+Martin Fowler beschreibt auf seiner Internet-Präsenz (\hyperlink{http://martinfowler.com/}{martinfowler.com}) folgende zwei Möglichkeiten der Implementierung:
+
+\subsubsection{Supervising Controller}
+
+\begin{quotation}
+	"'Factor the UI into a view and controller where the view handles simple mapping to the underlying model and the the controller handles input response and complex view logic."'
+\end{quotation}
+Hierbei übernimmt die View die Datensynchronisation zu großen Teilen selbst. Somit wird der aktive Synchronisationsaufwand im Presenter möglichst gering gehalten.
+
+\subsubsection{Passive View}
+\begin{quotation}
+	"'Passive View is a very similar pattern to Supervising Controller, but with the difference that Passive View puts all the view update behavior in the controller, including simple cases."' 
+\end{quotation}
+Die passive View wird so einfach wie möglich gehalten. Dies hat unter anderem den Vorteil, dass diese von Entwicklern/Designern erstellt werden können, die wenig bis keine Informationen über die Programmlogik haben. Hieraus folgt, dass der Presenter die Datensynchronisation weitestgehend vollständig übernimmt. 
+\\ \\
+\textbf{Um den Umfang der Ausarbeitung überschaubar zu halten, wird im folgenden von einer passiven View ausgegangen.} 
+\\ \\
+Im folgenden wird die Rollenverteilung einer MVP-Anwendung kurz veranschaulicht:
 
 \begin{center}
 	\fbox{\includegraphics[scale=1]{figure/MVP/MVP_Explanation}} %low level image include -> without float
@@ -12,13 +31,12 @@ Model-View-Presenter wurde in den 90er-Jahren von Taligant und IBM entwickelt. D
 	\label{pic:MVP_Explanation}
 \end{center}
 
-\textbf{Im Grundsatz ändert sich nur ein zentraler Aspekt im Vergleich zum klassischen MVC: }
-\\ \\
-
+\subsubsection{Im Grundsatz ändert sich nur ein zentraler Aspekt im Vergleich zum klassischen MVC: }
 
 Der Presenter ist das einzige Bindeglied zwischen Model und View. Im Vergleich wird bei diesem Pattern in der Theorie strikt darauf geachtet, dass die View keine Logik bezüglich der Daten mehr enthält und hat lediglich die Funktion die Daten darzustellen. Die zentrale Steuerung der Ansicht erfolgt durch den Presenter, woraus resultiert, dass die View keinen Zugriff auf die Funktionen des Models hat. 
 
 Im folgenden werden die drei Kernkomponenten für MVP definiert. 
+
 \subsubsection{Das Model}
 
 
@@ -104,23 +122,24 @@ Hier ein mögliches Klassendiagramm:
 	\label{pic:WalletMVPClassDiagram}
 \end{center}
 
-Unser Brieftaschen-Presenter hängt jeweils von den Brieftaschen-Interfaces der View und des Presenters ab. Zusätzlich benutzt er das Observer-Pattern um über Änderungen im Model informiert zu werden. 
+Unser Brieftaschen-Presenter hängt jeweils von den Brieftaschen-Interfaces der View und des Presenters ab. Zusätzlich benutzt er das Observer-Pattern um über Änderungen im Model informiert zu werden. Auf die explizite Darstellung der Abhängigkeiten von Java-Event-Handling wird aus Gründen der Übersicht verzichtet.
 \\ \\
+\textbf{Hinweis:} Da bei der passiven View die Handler für die einzelnen GUI-Elemente im Presenter liegen, wird hierbei implizit in den meisten Programmiersprachen ebenfalls das Observer-Pattern eingesetzt. 
 
 \textbf{Nun zur Spezifikation der Interfaces}
 
-Zuerst werden die Interfaces für unsere View und unser Model  spezifiert. Die entscheidenden Schnittstellen werden kurz beschrieben. 
+Zuerst werden die Interfaces für unsere View und unser Model spezifiert. Die entscheidenden Schnittstellen werden kurz beschrieben. 
 \\
 
  \begin{lstlisting} [caption={Beispiel für ein View-Interface}\label{lst: View_Interface},captionpos=t] 
- 
- public interface IWalletView {
-
-     public void setMoneyListener(ChangeListener _e);
-     public int  getMoneyFromView();
-     public void setMoneyToView(double inputMoney);
-     ...  
- }
+	 ...
+	 public interface IWalletView {
+	
+	     public void setMoneyListener(ChangeListener e_ref);
+	     public int  getMoneyFromView();
+	     public void setMoneyToView(double inputMoney);
+	     ...  
+	 }
  \end{lstlisting}
  
  
@@ -136,11 +155,12 @@ Nachdem zentralen Schnittstellen der View festgelegt
 wurden, geschieht nun das gleiche mit unserem Model (Geldbeutel).
 
 \begin{lstlisting} [caption={Beispiel für ein Model-Interface}\label{lst: View_Interface},captionpos=t] 
-public abstract class AWallet extends Observable {
-    
-    public abstract double getWalletValue();
-    public abstract void   setWalletValue(double inputMoney); 
-    ...
+	...
+	public abstract class AWallet extends Observable {
+	    
+	    public abstract double getWalletValue();
+	    public abstract void   setWalletValue(double inputMoney); 
+	    ...
 } 
  \end{lstlisting}
  
@@ -159,14 +179,15 @@ Im Code-Beispiel wird eine abstrakte Klasse verwendet, obwohl im Rest der Beschr
 Nun da unsere Interfaces für Model und View spezifiert sind, kann der Presenter definiert werden. 
 
 \begin{lstlisting} [caption={Beispiel für einen Presenter}\label{lst: View_Interface},captionpos=t] 
-public class WalletPresenter {
+	...
+	public class WalletPresenter {
     
-    private IWalletView _walletView;
-    private AWallet     _walletModel;
-   
-    public WalletPresenter(IWalletView _inputWalletView
-    					   ,AWallet _inputWalletModel) 
-    {...}                   
+	    private IWalletView walletView_ref;
+	    private AWallet     walletModel_ref;
+	   
+	    public WalletPresenter(IWalletView inputWalletView_ref,
+	    					   					 AWallet inputWalletModel_ref) 
+	    {...}                   
 }
  \end{lstlisting}
  
@@ -175,22 +196,27 @@ Zuerst zum Konstruktor: Da der Presenter nur mit den Schnittstellen der einzelne
   \begin{lstlisting} [caption={Beispiel für einen Presenter}\label{lst: View_Interface},captionpos=t] 
  	...
  	 public void update(Observable arg0, Object arg1) {
- 	                   double value = WalletPresenter.this._walletModel.getWalletValue();
- 	                   WalletPresenter.this._walletView.setMoneyToView(value);
+ 	 
+	   double value = WalletPresenter.this.walletModel_ref.getWalletValue();
+	   WalletPresenter.this.walletView_ref.setMoneyToView(value);
+	   
  	}
  	...
    \end{lstlisting}
 
 Im Konstruktor muss zusätzlich unser Presenter noch als Beobachter bei unserem Model registriert werden. Weiterhin wird festgelegt, dass bei einer Änderung am Model die View ebenfalls durch den Presenter aktualisiert wird. 
 
-  \begin{lstlisting} [caption={Beispiel für einen Presenter}\label{lst: View_Interface},captionpos=t] 
+  \begin{lstlisting} [caption={Beispiel für einen Presenter}\label{lst: View_Interface},captionpos=t,breaklines=true] 
   	...
   	this._walletView.setMoneyListener(new ChangeListener() {
-  	                public void stateChanged(ChangeEvent e) {
-  	                    int value = WalletPresenter.this._walletView.getMoneyFromView();
-  	                    WalletPresenter.this._walletModel.setWalletValue(value);
-  	                }
-  	        });
+  	
+      public void stateChanged(ChangeEvent e) {
+      
+        int value = WalletPresenter.this.walletView_ref.getMoneyFromView();
+        WalletPresenter.this.walletModel_ref.setWalletValue(value);
+        
+       }
+  	});
   	...
     \end{lstlisting}
     
@@ -202,7 +228,7 @@ Im Konstruktor muss zusätzlich unser Presenter noch als Beobachter bei unserem M
    Das folgende Sequenzdiagramm zeigt was innerhalb der einzelnen Komponenten passiert, sollte der Benutzer den Inhalt des Geldbeutels durch einer der Benutzerschnittstellen ändern. 
    
    	\begin{center}
-   		\fbox{\includegraphics[scale=1.1]{figure/MVP/MVP_WalletSequenceDiagram}} %low level image include -> without float
+   		\includegraphics[scale=1.1]{figure/MVP/MVP_WalletSequenceDiagram} %low level image include -> without float
    			\captionof{figure}{Ablauf bei Änderung des Geldbetrages durch den Benutzer} %\captionof instead of \caption
    		\label{pic:Wallet_MVP_SequenceDiagram}
    	\end{center}
@@ -219,23 +245,40 @@ Im Konstruktor muss zusätzlich unser Presenter noch als Beobachter bei unserem M
      
      \begin{minipage}[hbt]{6cm}
      	\centering
-     		\fbox{\includegraphics[scale=1.0]{figure/MVP/MVP_SliderWalletGUI}}
+     		\includegraphics[scale=1.0]{figure/MVP/MVP_SliderWalletGUI}
      		\captionof{figure}{Beispiel: Geldbeutel-View mit JSlider und Textanzeige}
      	\label{Bild1}
      \end{minipage}
      \hfill
      \begin{minipage}[hbt]{6cm}
      	\centering
-     		\fbox{\includegraphics[scale=1.0]{figure/MVP/MVP_SpinnerWalletGUI}}
+     		\includegraphics[scale=1.0]{figure/MVP/MVP_SpinnerWalletGUI}
      		\captionof{figure}{Beispiel: Geldbeutel-View mit JSpinner und JProgressBar}
      	\label{Bild2}
      \end{minipage}
     Durch den JSlider und den JSpinner der Benutzerschnittstellen kann der aktuelle Betrag verändert werden. Wobei die Anzeige des Geldbetrags jeweils bei allen Schnittstellen synchron gehalten wird.     
+    
+    \subsection{Vor- und Nachteile}
+    	\subsubsection{Vorteile}
+    		\begin{itemize}
+	    		\item{Konzept mit strukturierter Rollenverteilung, dadurch entsteht eine relativ klare Aufgabenteilung}
+	    		
+	    		\item{Modultests der Anwendung sind durch Austauschbarkeit der Komponenten relativ einfach möglich} 
+	    		
+	    		\item{Die Aufteilung erlaubt es Entwicklern sich einzubringen ohne die komplette Anwendungslogik verstehen zu müssen}
+	    		
+	    		\item{Das Pattern erlaubt es die einzelnen Elemente wie Model und View zu erweitern}
+
+    		\end{itemize}
+    	\subsubsection{Nachteile}
+    		\begin{itemize}
+    			\item{Höherer Implementierungs- sowie Designaufwand. Die Verwendung des Patterns erfordert klare Definition der einzelnen Rollen, was nicht auf jede Problemstellung einfach übertragen werden kann. So muss das Pattern je nach Problemstellung unter Umständen entsprechend modifiziert werden.}
+			\end{itemize}
     \subsection{Fazit}
     
-    Das Mode-View-Presenter Pattern bietet eine strukturierte vorgehensweise zum erstellen größerer Benutzeroberflächen mit klar abgrenzender Geschäftslogik. Die Rollen in den einzelnen Anwendungen sind hierdurch klar definiert und die einzelne Komponenten können weiterhin ausgetauscht oder ergänzt werden. 
+    Das Mode-View-Presenter Pattern bietet eine strukturierte Vorgehensweise zum erstellen größerer Benutzeroberflächen mit klar abgrenzender Geschäftslogik. Die Rollen in den einzelnen Anwendungen sind hierdurch klar definiert und die einzelne Komponenten können weiterhin ausgetauscht oder ergänzt werden. 
     \\ \\
-    Doch besonders für kleinere Anwendungen ist im Verhältnis ein relativ hoher Design-Aufwand nötig. Die Interfaces von View und Model müssen zu Beginn schon möglichst exakt spezifiert werden können, da nachträgliche Änderungen schnell zu Chaos im Konzept der Anwendung führen können. Zusätzlich gilt auch hier, wie für jedes Pattern, dass nicht jede Anwendung mit diesem Konzept realisiert werden kann. 
+    Doch besonders für kleinere Anwendungen ist im Verhältnis ein relativ hoher Design-Aufwand nötig. Die Interfaces von View und Model müssen zu Beginn schon möglichst exakt spezifiziert werden können, da nachträgliche Änderungen schnell zu Chaos im Konzept der Anwendung führen. Zusätzlich gilt auch hier, wie für jedes Pattern, dass nicht jede Anwendung mit diesem Konzept realisiert werden kann. 
     
     
   

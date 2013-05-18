@@ -111,8 +111,8 @@ public class SliderWalletView extends javax.swing.JFrame implements IWalletView 
      *@brief set Listener for changes in Model
      */
     @Override
-    public void setMoneyListener(ChangeListener _e) {
-       this.setValue_Slider.addChangeListener(_e);
+    public void setMoneyListener(ChangeListener e_ref) {
+       this.setValue_Slider.addChangeListener(e_ref);
     }
 
     @Override
