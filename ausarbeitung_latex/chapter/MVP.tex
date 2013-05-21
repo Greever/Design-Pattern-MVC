@@ -21,9 +21,9 @@ Hierbei übernimmt die View die Datensynchronisation zu großen Teilen selbst. Som
 \end{quotation}
 Die passive View wird so einfach wie möglich gehalten. Dies hat unter anderem den Vorteil, dass diese von Entwicklern/Designern erstellt werden können, die wenig bis keine Informationen über die Programmlogik haben. Hieraus folgt, dass der Presenter die Datensynchronisation weitestgehend vollständig übernimmt. 
 \\ \\
-\textbf{Um den Umfang der Ausarbeitung überschaubar zu halten, wird im folgenden von einer passiven View ausgegangen.} 
+\textbf{Um den Umfang der Ausarbeitung überschaubar zu halten, wird im folgenden von einer passiven View ausgegangen} 
 \\ \\
-Im folgenden wird die Rollenverteilung einer MVP-Anwendung kurz veranschaulicht:
+Die allgemeine Rollenverteilung in MVP ist wie folgt: 
 
 \begin{center}
 	\fbox{\includegraphics[scale=1]{figure/MVP/MVP_Explanation}} %low level image include -> without float
@@ -40,7 +40,7 @@ Im folgenden werden die drei Kernkomponenten für MVP definiert.
 \subsubsection{Das Model}
 
 
-	Die zentrale Aufgabe des Models ist die Bereitstellung von Daten. Daraus folgen weitere Aufgaben wie Datenhaltung, Datenstrukturen, peresisstente Speicherung der Daten sowie die Bereitstellung einer eindeutig definierten Schnittstelle. Die Daten bzw. Programmlogik wird vollständig durch das Model gekapselt. Hierdurch können unter anderem Datenstrukturen innerhalb des Models ohne Veränderung der restlichen Programmlogik ausgetauscht werden. Zusätzlich ist es nicht notwendig, dass das Model der Datenspeicher an sich ist. Es ist auch möglich, dass es lediglich die Funktion eines Proxy hat und die Daten von z. B. einer Datenbank "'weiterreicht"'.
+	Die zentrale Aufgabe des Models ist die Bereitstellung von Daten. Daraus folgen weitere Aufgaben wie Datenhaltung, Datenstrukturen, persistente Speicherung der Daten sowie die Bereitstellung einer eindeutig definierten Schnittstelle. Die Daten bzw. interne Geschäftslogik wird vollständig durch das Model gekapselt. Hierdurch können unter anderem Datenstrukturen innerhalb des Models ohne Veränderung der restlichen Programmlogik ausgetauscht werden. Zusätzlich ist es nicht notwendig, dass das Model der Datenspeicher an sich ist. Es ist auch möglich, dass es lediglich die Funktion eines Proxy hat und die Daten von z. B. einer Datenbank "'weiterreicht"'.
 	\begin{center}
 		\fbox{\includegraphics[scale=0.5]{figure/MVP/MVP_exampleModelasProxy}} %low level image include -> without float
 			\captionof{figure}{Beispiel für ein Model als Proxy} %\captionof instead of \caption
@@ -74,9 +74,10 @@ Man kann sich View und Model auch als Schichten vorstellen, wobei der Presenter 
 
 \subsubsection{Die View}
 
-Die View hat die Aufgabe die Eingabe- und Ausgabeelemente darzustellen. In der heutigen Zeit wird die View meist passiv implementiert, was bedeutet, dass sie keinerlei Steuerlogik bezüglich der Anwendung enthält und Validierung sowie Verfikation der Daten an den Presenter weiterreicht.
+Die View hat die Aufgabe die Eingabe- und Ausgabeelemente darzustellen. 
 \\ \\
 Aus Sicht des Programmierers ist für die View wichtig, wie interagiert der Benutzer mit den Daten. Zum Beispiel welche Eingaben sind an der Benutzerschnittstelle erlaubt?
+\\ \\ 
 
 \subsection{Mögliche Strukturierung einer moderenen MVP-Anwendung}
 
@@ -125,7 +126,7 @@ Hier ein mögliches Klassendiagramm:
 Unser Brieftaschen-Presenter hängt jeweils von den Brieftaschen-Interfaces der View und des Presenters ab. Zusätzlich benutzt er das Observer-Pattern um über Änderungen im Model informiert zu werden. Auf die explizite Darstellung der Abhängigkeiten von Java-Event-Handling wird aus Gründen der Übersicht verzichtet.
 \\ \\
 \textbf{Hinweis:} Da bei der passiven View die Handler für die einzelnen GUI-Elemente im Presenter liegen, wird hierbei implizit in den meisten Programmiersprachen ebenfalls das Observer-Pattern eingesetzt. 
-
+\\ \\
 \textbf{Nun zur Spezifikation der Interfaces}
 
 Zuerst werden die Interfaces für unsere View und unser Model spezifiert. Die entscheidenden Schnittstellen werden kurz beschrieben. 
@@ -222,9 +223,8 @@ Im Konstruktor muss zusätzlich unser Presenter noch als Beobachter bei unserem M
     
     Anschließend muss im Konstruktor noch der Handler für unsere Benutzerschnittstellen-Events definiert werden. 
     
-    Hiermit ist der Presenter definiert. Er ist realtiv einfach gehalten und benötigt lediglich einen Konstruktor. Bei größeren Presenter werden natürlich noch weitere Hilfsmethoden benötigt. Im Idealfall jedoch hat der Presenter keine Schnittstellen auser den Konstruktoren!
-   
-   
+    Der Presenter ist realtiv einfach gehalten und benötigt lediglich einen Konstruktor. Bei größeren Presenter werden natürlich noch weitere Hilfsmethoden benötigt. Im Idealfall jedoch hat der Presenter keine Schnittstellen auser den Konstruktoren!
+   \\ \\
    Das folgende Sequenzdiagramm zeigt was innerhalb der einzelnen Komponenten passiert, sollte der Benutzer den Inhalt des Geldbeutels durch einer der Benutzerschnittstellen ändern. 
    
    	\begin{center}
@@ -233,7 +233,7 @@ Im Konstruktor muss zusätzlich unser Presenter noch als Beobachter bei unserem M
    		\label{pic:Wallet_MVP_SequenceDiagram}
    	\end{center}
    	
-   	Durch die Veränderung des Geldbetrages durch den Benutzer wird durch das Change-Event der Benutzeroberfläche der Presenter informiert und entsprechend wird der Betrag im Model geändert. Da der Presenter ein Beobachter des Models ist, informiert dieses den Presenter über die Änderungen. Da der Presenter nun weis, dass sich der Geldbetrag geändert hat, holt sich der Presenter den aktuellen Betrag vom Model und führt hiermit einen Update der View aus. 
+   	Durch die Veränderung des Geldbetrages durch den Benutzer wird durch das Change-Event der Benutzeroberfläche der Presenter informiert und entsprechend wird der Betrag im Model geändert. Da der Presenter ein Beobachter des Models ist, informiert dieses den Presenter über die Änderungen. Nun holt sich der Presenter den aktuellen Betrag vom Model und führt hiermit einen Update der View aus. 
    	\\ \\
    	\textbf{Hinweis: } Das Konstrukt kann am Anfang etwas umständlich wirken. Der Presenter hätte auch direkt den Eingabewert benutzen können um hiermit die View zu aktualisieren. Die Prüfung auf Korrektheit übernimmt jedoch das Model, dies ist Teil der Datenkapselung. Wenn man das Beispiel zusätzlich noch verallgemeinert, kann das Model noch von anderen Presentern in der Zwischenzeit verändert werden, wodurch der verwendete Wert nicht mehr aktuell sein kann. 
    	\\ \\
@@ -272,11 +272,11 @@ Im Konstruktor muss zusätzlich unser Presenter noch als Beobachter bei unserem M
     		\end{itemize}
     	\subsubsection{Nachteile}
     		\begin{itemize}
-    			\item{Höherer Implementierungs- sowie Designaufwand. Die Verwendung des Patterns erfordert klare Definition der einzelnen Rollen, was nicht auf jede Problemstellung einfach übertragen werden kann. So muss das Pattern je nach Problemstellung unter Umständen entsprechend modifiziert werden.}
+    			\item{Höherer Implementierungs- sowie Designaufwand. Die Verwendung des Patterns erfordert klare Definition der einzelnen Rollen, was nicht auf jede Problemstellung einfach übertragen werden kann. So muss das Pattern je nach Anwendungsfall entsprechend modifiziert werden.}
 			\end{itemize}
     \subsection{Fazit}
     
-    Das Mode-View-Presenter Pattern bietet eine strukturierte Vorgehensweise zum erstellen größerer Benutzeroberflächen mit klar abgrenzender Geschäftslogik. Die Rollen in den einzelnen Anwendungen sind hierdurch klar definiert und die einzelne Komponenten können weiterhin ausgetauscht oder ergänzt werden. 
+    Das Model-View-Presenter Pattern bietet eine strukturierte Vorgehensweise zum erstellen größerer Benutzeroberflächen mit klar abgrenzender Geschäftslogik. Die Rollen sind hierdurch klar definiert und die einzelne Komponenten können weiterhin ausgetauscht oder ergänzt werden. 
     \\ \\
     Doch besonders für kleinere Anwendungen ist im Verhältnis ein relativ hoher Design-Aufwand nötig. Die Interfaces von View und Model müssen zu Beginn schon möglichst exakt spezifiziert werden können, da nachträgliche Änderungen schnell zu Chaos im Konzept der Anwendung führen. Zusätzlich gilt auch hier, wie für jedes Pattern, dass nicht jede Anwendung mit diesem Konzept realisiert werden kann. 
     
