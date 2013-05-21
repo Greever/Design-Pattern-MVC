@@ -1,4 +1,9 @@
+Das Observer Pattern gehört zu der Kategorie Verhaltensmuster. 
+Mit ihm ist es möglich Änderungen von einem Objekt an ein anderes Objekt, welches von ersterem strukturell abhängig ist, weiterzugeben.
+Es ist auch unter dem Namen \textbf{publish-subscribe} bekannt.
+
 \section{Problem}
+	Als Beispiel einer Anwendung ohne Observer Pattern betrachten wir folgende Problemstellung:
 
 	\begin{center}
 		\fbox{\includegraphics[scale=1]{figure/Observer/einleitungW}} 
@@ -6,11 +11,12 @@
 		\label{pic:einleitungW}
 	\end{center}
 
-
 	Der FAZ-Verlag versendet die jeweils aktuelle Zeitung an seine Abonnenten, Familie Fischer und Meier.\\
 	Bei jeder neuen Zeitung soll eine Auslieferung erfolgen.\\
 	
-	Nachfolgend ist der Sachverhalt als Klassendiagramm einer simplen Lösung dargestellt:\\
+	Nachfolgend ist der Sachverhalt als Klassendiagramm einer simplen Lösung (ohne Observer Pattern) dargestellt:\\
+
+	\enlargethispage{2cm}	
 
 	\begin{center}
 		\fbox{\includegraphics[scale=0.8]{figure/Observer/einleitungI-kl}}
@@ -52,12 +58,14 @@
 		\end{itemize}
 
 
-\section{Lösung: Observer Pattern}
+\section{Lösung: Das Observer Pattern}
 
 	Für eine gute, erweiterbare Lösung: Das \textbf{Observer Pattern}. \\
 
 	"Definiere eine 1-zu-n-Abhängigkeit zwischen Objekten, so dass die Änderung des Zustands eines Objekts dazu führt, 
 	das alle abhängigen Objekte benachrichtigt und automatisch aktualisiert werden." ([GoF], Seite 287) \\
+	
+	\pagebreak[4]
 	
 	Der grobe Sachverhalt des Observer Patterns sieht wie folgt aus:
 	\begin{center}
@@ -100,9 +108,9 @@
 			\end{lstlisting}
 		
 			\begin{itemize}
-				\item[+]{Observer benötigt keine Informationen über Subjekt -> Starke Entkopplung!}
-				\item[-]{Nicht jeder Observer benötigt alle/die selben Parameter!}
-				\item[-]{Bei Erweiterung müssen alle Observer angepasst werden\\
+				\item[\Checkmark]{ Observer benötigt keine Informationen über Subjekt -> Starke Entkopplung!}
+				\item[\XSolid]{Nicht jeder Observer benötigt alle/die selben Parameter!}
+				\item[\XSolid]{Bei Erweiterung müssen alle Observer angepasst werden\\
 					-> Event-Objekt als Parameter anstatt einzelner Parameter\\
 					(GUI-Objekte wie Swing nutzen diese Methode)}
 			\end{itemize}
@@ -120,9 +128,9 @@
 			\end{lstlisting}
 			
 			\begin{itemize}
-				\item[+]{Jeder Observer holt sich per Getter nur die benötigten Informationen.}
-				\item[+]{Bei mehreren Subjekten: Eindeutig von welchem Subjekt!}
-				\item[-]{Kann ineffizient werden, da Observer herausfinden muss was sich konkret verändert hat.}
+				\item[\Checkmark]{Jeder Observer holt sich per Getter nur die benötigten Informationen.}
+				\item[\Checkmark]{Bei mehreren Subjekten: Eindeutig von welchem Subjekt!}
+				\item[\XSolid]{Kann ineffizient werden, da Observer herausfinden muss was sich konkret verändert hat.}
 			\end{itemize}
 
 		\enlargethispage{2cm}
