@@ -22,11 +22,11 @@ import View.UserManager;
 public class LoginManagerMain {
     public static void main (String args []) {
         //init objects
-        AUserHandler _h             = new UserStorage1();
-        AUserLoginPresenter _pLogin  = new UserLoginPresenter();
-        ALoginManagerPresenter _pManager = new LoginManagerPresenter();
-        IUserLogin _vLogin   = new LoginScreen();  
-        ILoginManager _vManager = new UserManager(); 
+        AUserHandler _h                     = new UserStorage1();
+        AUserLoginPresenter _pLogin         = new UserLoginPresenter();
+        ALoginManagerPresenter _pManager    = new LoginManagerPresenter();
+        IUserLogin _vLogin                  = new LoginScreen();  
+        ILoginManager _vManager             = new UserManager(); 
         
         
         //init relationships

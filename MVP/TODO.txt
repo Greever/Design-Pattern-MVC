@@ -1,14 +1,8 @@
 Ausarbeitung: 
-drüber lesen
 
-
-Code:
-Mock-View basteln
 
 Präsentation: 
-Rechtschreibfehler überarbeiten 
-Grafik_MVP_Aufbau an Farben anpassen 
-GeldbeutelBeispiel noch überarbeiten
+
 
 
 
