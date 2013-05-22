@@ -132,9 +132,11 @@ Zuerst wird die Struktur der Anwendung anhand eines Klassendiagramms kurz erklär
 	\label{pic:WalletMVPClassDiagram}
 \end{center}
 
-Unser Brieftaschen-Presenter hängt jeweils von den Brieftaschen-Interfaces der View und des Presenter ab. Zusätzlich benutzt er das Observer-Pattern um über Änderungen im Model informiert zu werden. Auf die explizite Darstellung der Abhängigkeiten von Java-Event-Handling wird aus Gründen der Übersicht verzichtet.
+Unser Brieftaschen-Presenter hängt jeweils von den Brieftaschen-Interfaces der View und des Presenter ab. Zusätzlich benutzt er das Observer-Pattern um über Änderungen im Model informiert zu werden. 
 \\ \\
 \textbf{Hinweis:} Da bei der passiven View die Handler für die einzelnen GUI-Elemente im Presenter liegen, wird hierbei implizit ebenfalls das Observer-Pattern eingesetzt, um Veränderungen an der GUI durch den Benutzer mitzuteilen.
+\\ \\
+\textbf{Weiterer Hinweis:}Auf die explizite Darstellung der Abhängigkeiten von Java-Event-Handling, sowie der Observer-Implementierung wird aus Gründen der Übersicht verzichtet.
 \\ \\
 \textbf{Nun zur Spezifikation der Interfaces}
 
@@ -186,7 +188,7 @@ wurden, geschieht nun das gleiche mit unserem Model (eigentlicher Geldbeutel-Inh
 \textbf{Hinweis}:
 Im Code-Beispiel wird eine abstrakte Klasse verwendet, obwohl im Rest der Beschreibung immer von einem Model-Interface gesprochen wird. Der Grund hierfür ist, dass jedes unserer Geldbeutel-Models von der Klasse Observable erben muss. Es wäre auch ein Interface möglich oder eine Kombination aus einem Interface und einer abstrakten Klasse in Java. 
 \\ \\
-Alternative kann hier auch auf dasJava-Observer Pattern verzichtet werden und eigene Implementierung erfolgen.
+Alternative kann hier auch auf das Java-Observer Pattern verzichtet werden und eigene Implementierung erfolgen.
 \\ \\ \\
 \textbf{Nun da unsere Interfaces für Model und View spezifiziert sind, kann der Presenter definiert werden.}
 
