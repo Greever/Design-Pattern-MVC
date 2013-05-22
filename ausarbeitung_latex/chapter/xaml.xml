@@ -1,6 +1,30 @@
-<Page 
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  x:Class="ExampleNamespace.ExamplePage">
-  <Button Click="Button_Click" >Click Me!</Button>
-</Page>
+<Window x:Class="MVVMPattern.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:MVVMPattern.ViewModel"
+        Title="MainWindow" SizeToContent="WidthAndHeight" >
+    <Window.Resources>
+        <vm:MainViewModel x:Key="mainViewModel"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource mainViewModel}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Vorname:" VerticalAlignment="Bottom" Margin="2"/>
+        <TextBox Text="{Binding Friends/FirstName}" Grid.Column="1" Margin="2"/>
+        <TextBlock Text="Nachname:" Grid.Row="1" VerticalAlignment="Bottom" Margin="2"/>
+        <TextBox Text="{Binding Friends/LastName}" Grid.Row="1" Grid.Column="1" Margin="2"/>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <Button Content="prev" Command="{Binding PreviousCommand}" Width="75" Margin="10"/>
+            <Button Content="next" Command="{Binding NextCommand}" Width="75" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>
