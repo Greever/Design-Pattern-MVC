@@ -9,7 +9,7 @@
 
 	Bei solchen oder ähnlichen Problemstellungen kann das Design Pattern MVC (Model View Controller) helfen.
 
-\section{Definition}
+\section{Bestandteile}
 
 	MVC behandelt drei Rollen:
 	
@@ -20,17 +20,16 @@
 	\end{center}
 
 	\subsection{Model}
-		Implementiert die zentrale Struktur der Anwendung.
-		Enthält die Geschäftslogik
-		Schnittstelle(n) für Datenzugriff
-		Das Model kann auch nur Proxy auf die Daten sein
+		Implementiert die zentrale Struktur der Anwendung.\\
+		Enthält die Geschäftslogik.\\
+		Schnittstelle(n) für Datenzugriff.\\
+		Das Model kann auch nur Proxy auf die Daten sein.
 
 	\subsection{View}
 		Repräsentiert die Anzeige des Models in dem User Interface.
 
 	\subsection{Controller}
-		Verwaltet Benutzereingaben, manipuliert das Model und aktualisiert die View\\ \\
-		Es gibt keine Standarddefinition für MVC. Viele Frameworks benutzen unterschiedliche Versionen.\\
+		Verwaltet Benutzereingaben, manipuliert das Model und aktualisiert die View.\\
 
 	\textbf{Connelly Barnes}: "'An easy way to understand MVC: 
 	the model is the data, the view is the window on the screen, and the controller is the glue between the two."'\\
@@ -41,12 +40,12 @@
 		\item{Die View/Ansicht von dem Modell trennen.}
 		\item{Ermöglicht es mehrere verschiedene User Interfaces zu implementieren und die Module besser zu testen.}
 		\item{Den Controller von der Präsentation trennen.}
-		\item{Besonders nützlich mit Web Interfaces. (bei GUI frameworkds eher weniger)}
+		\item{Besonders nützlich mit Web Interfaces. (bei GUI Frameworks eher weniger)}
 	\end{itemize}
 
 	\textbf{Martin Fowler}: "'The irony ist hat almost every version of smalltalk didn't actually make a view/controller separation"'\\
 
-\section{Unterschiedlche MVC Definitionen}
+\section{Unterschiedliche MVC Definitionen}
 	MVC wurde von \textbf{Trygve Reenskaug} im Jahre 1979 das erste Mal beschrieben.\\
 
 	Eine der ersten Diskussion "'A Cookbook for Using the Model-View-Controller User Interface Paradigm in Smalltalk-80"'
@@ -59,7 +58,7 @@
 	\subsection{MVC in Smalltalk '80}
 	\begin{center}
 		\fbox{\includegraphics[scale=0.5]{figure/MVC/MVC_diagram_smalltalk}} %low level image include -> without float
-			\captionof{figure}{Smalltalk Model View Controller} 			%\captionof instead of \caption
+			\captionof{figure}{Model View Controller in Smalltalk} 			%\captionof instead of \caption
 		\label{pic:MVC_diagram_smalltalk}
 	\end{center}
 
@@ -71,7 +70,7 @@
 	\end{itemize}
 
 
-	\begin{lstlisting} [caption={Model Klasse}\label{lst: Model_bsp},captionpos=t] 
+	\begin{lstlisting} [caption={Model Klasse an Smalltalk angelehnt (JQuery \& Coffeescript)}\label{lst: Model_bsp},captionpos=t] 
 	class ModelCounter
 	    constructor: ->
 	        @observers = []
@@ -88,7 +87,7 @@
 	        @observers.push(observer)
 	\end{lstlisting}
 
-	\begin{lstlisting} [caption={View/Controller Klasse}\label{lst: View_Controller_bsp},captionpos=t] 
+	\begin{lstlisting} [caption={View/Controller Klasse an Smalltalk angelehnt (JQuery \& Coffeescript)}\label{lst: View_Controller_bsp},captionpos=t] 
 	class ViewCounterButton
 	    constructor: (opts) ->
 	        @model_counter = opts.model_counter
