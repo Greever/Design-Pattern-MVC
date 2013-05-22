@@ -35,7 +35,7 @@ public class SliderWalletView extends javax.swing.JFrame implements IWalletView 
         header_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Spinner");
+        setTitle("Slider");
         setResizable(false);
 
         currentValue_TextField.setEditable(false);
