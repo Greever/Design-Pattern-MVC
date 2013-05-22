@@ -1,11 +1,15 @@
 Ausarbeitung: 
-
+drüber lesen
 
 
 Code:
+Mock-View basteln
 
 Präsentation: 
-konkretes Beispiel noch einfügen 
+Rechtschreibfehler überarbeiten 
+Grafik_MVP_Aufbau an Farben anpassen 
+GeldbeutelBeispiel noch überarbeiten
+
 
 
 + altes Fernglas 
