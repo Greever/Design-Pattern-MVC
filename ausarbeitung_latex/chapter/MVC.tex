@@ -104,3 +104,67 @@
 	    notify: =>
 	        $("button.#{@button_class}").replaceWith(=> @render())
 	\end{lstlisting}
+
+
+	\subsection{MVC in Cocoa}
+	\begin{center}
+		\fbox{\includegraphics[scale=0.8]{figure/MVC/cocoa_mvc}} %low level image include -> without float
+			\captionof{figure}{Model View Controller in Cocoa} 			%\captionof instead of \caption
+		\label{pic:MVC_diagram_cocoa}
+	\end{center}
+
+	\subsubsection{Schlüsselaspekte}
+	\begin{itemize}
+		\item{In Cocoa wird das Mediator Pattern genutzt. Datenfluss wird dadurch sauberer implementiert}
+		\item{Cocoa wird genutzt um Mac OSX und iOS Anwendungen zu erstellen.}\\
+	\end{itemize}
+
+	\begin{lstlisting} [caption={Beispiel an Cocoa angelehnt (JQuery \& Coffeescript)}\label{lst: cocoa_bsp},captionpos=t] 
+	class ModelCounter
+
+	    constructor: (@value=1) ->
+
+	    increaseValue: (delta) =>
+	        @value += delta
+
+	class ControllerCounter
+
+	    constructor: (opts) ->
+	        @model_counter = opts.model_counter
+	        @observers = []
+
+	    getValue: => @model_counter.value
+
+	    increaseValue: (delta) =>
+	        @model_counter.increaseValue(delta)
+	        @notifyObservers()
+
+	    notifyObservers: =>
+	        obj.notify(this) for obj in @observers
+
+	    registerObserver: (observer) =>
+	        @observers.push(observer)
+
+	class ViewCounterButton
+
+	    constructor: (opts) ->
+	        @controller_counter = opts.controller_counter
+	        @button_class = opts.button_class or 'button_counter'
+	        @controller_counter.registerObserver(this)
+
+	    render: =>
+	        elm = $("<button class=\"#{@button_class}\">
+	                #{@controller_counter.getValue()}</button>")
+	        elm.click =>
+	            @controller_counter.increaseValue(1)
+	        return elm
+
+	    notify: =>
+	        $("button.#{@button_class}").replaceWith(=> @render())
+	\end{lstlisting}
+
+\section{Weiterentwicklungen}
+	Da MVC sehr beliebt wurde und jeder Entwickler darin seine eigene Vorstellung davon hat, kam es immer wieder zu Weiterentwicklungen und Zusätze zu dem Grundgedanken von MVC.
+	Diese Weiterentwicklungen finden auch in neueren Systemen, mit aktuellen Programmiersprachen mehr Anwendungsmöglichkeiten.
+	Je nach Anwedungsfall, Programmiersprache, Problemstellung und einigen anderen Faktoren, passt das eine Derivat vielleicht besser als das andere.\\ \\
+	In den nächsten Kapiteln werden die wichtigsten und bekanntesten Weiterentwicklungen von MVC behandelt.\\
