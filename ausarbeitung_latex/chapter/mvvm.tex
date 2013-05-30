@@ -1,13 +1,13 @@
-Während die Ursprünge des \ac{MVC}-Entwurfsmusters in den 1980er Jahren liegen und das \ac{MVP}-Entwurfsmuster erst in den 1990 Jahren zum ersten Mal beschrieben wurde,
-ist das \ac{MVVM} noch relativ jungen Alters.
+Während die Ursprünge des MVC-Entwurfsmusters in den 1980er Jahren liegen und das MVP-Entwurfsmuster erst in den 1990 Jahren zum ersten Mal beschrieben wurde,
+ist das MVVM noch relativ jungen Alters.
 Das MVVM ist zudem anders als die beiden anderen Entwurfsmuster das spezifischste Muster, denn während MVC und MVP relativ geringe Voraussetzungen für ihre Verwendung haben,
-ist MVVM speziell für morderne Technologien konzipiert. So setzt die Verwendung des MVVM den Einsatz von Microsofts \ac{WPF} oder Silverlight zwar nicht unbedingt voraus, ist aber ratsam.
+ist MVVM speziell für moderne Technologien konzipiert. So setzt die Verwendung des MVVM den Einsatz von Microsofts WPF oder Silverlight zwar nicht unbedingt voraus, ist aber ratsam.
 Trotz dieser Einschränkung, ist es kein Fehler sich mit diesen Muster zu beschäftigen, schließlich werden mittlerweile ein Großteil aller Benutzeroberflächen, die auf .NET-Framework basieren damit erstellt.
 
 \newpage
 
 \section{Erklärung}
-So wie das MVP eine Weiterentwicklung des MVC ist, ist das MVVM eine Weiterentwicklung des MVP-Entwursmusters.
+So wie das MVP eine Weiterentwicklung des MVC ist, ist das MVVM eine Weiterentwicklung des MVP-Entwurfsmusters.
 Das Ziel dabei ist eine vollständige Entkopplung der View von der Logik.
 
 \subsection{Model}
@@ -17,42 +17,42 @@ Dazu benachrichtigt es über Datenänderungen und führt eine Validierung der vom B
 
 \subsection{ViewModel}
 Das ViewModel ist laut Martin Fowler praktisch dem Presenter im MVP gleichzusetzen.
-Es beinhaltet die UI-Logik (Model der View) und dient als Bindeglied zwischen View und obigem Model. 
+Es beinhaltet die UI-Logik (Model der View) und dient als Bindeglied zwischen View und obigen Model. 
 Einerseits tauscht es Information mit dem Model aus, ruft also Methoden oder Dienste auf. Andererseits stellt es der View öffentliche Eigenschaften und Befehle zur Verfügung. 
-Diese werden von der View an Steuerelemente gebunden, um Inhalte auszugeben bzw. UI-Ereignisse weiterzuleiten. Insgesamt wird CRUD ermöglicht. Das ViewModel darf dabei keinerlei Kenntnis der View besitzen.
+Diese werden von der View an Steuerelemente gebunden, um Inhalte auszugeben bzw. UI-Ereignisse weiterzuleiten. Das ViewModel darf dabei keinerlei Kenntnis der View besitzen.
 
 \subsection{View}
-Die View ist wie im MVC und MVP für Bereitstellung des Benutzeroberfläche zuständig.
+Die View ist wie im MVC und MVP für die Bereitstellung der Benutzeroberfläche zuständig.
 Außerdem gilt im MVVM-Entwurfsmuster: 
-Es bindet sich an Eigenschaften des ViewModel, um Inhalte darzustellen und zu manipulieren sowie Benutzereingaben weiterzuleiten. 
-Dieses sogennante Binding ermöglicht die Austauschbarkeit der View. Der Codebehind kann ebenfalls gering gehalten werden.
+Die View bindet sich an Eigenschaften des ViewModel, um Inhalte darzustellen und zu manipulieren sowie Benutzereingaben weiterzuleiten. 
+Dieses sogenannte Binding ermöglicht die Austauschbarkeit der View. Der Codebehind kann ebenfalls gering gehalten werden.
 \newline
 \ 
 \newline
 Die View muss einzig per Binding an bestimmte Properties des ViewModels gebunden sein.
-In Abbildung \ref{mvvmA} sind die Schichten des MVVM-Entwufsmusters schematisch dargestellt.
+In Abbildung \ref{mvvmA} sind die Schichten des MVVM-Entwurfsmusters schematisch dargestellt.
 
-\bild{0.6}{MVVM/mvvmschema.png}{Die Schichten des MVVM-Entwufsmusters}{mvvmA}
+\bild{0.6}{MVVM/mvvmschema.png}{Die Schichten des MVVM-Entwurfsmusters}{mvvmA}
 \ 
 \newline
 
 \newpage
 
 \section{Problem}
-Bei der Erstellung einfacher Anwendungen reicht es oftmals eine Benutzeroberfläche zu erstellen, die für alle Auslieferungen gleich sind und für immer gleich bleiben wird.
+Bei der Erstellung einfacher Anwendungen reicht es oftmals eine Benutzeroberfläche zu erstellen, die für alle Auslieferungen gleich ist und für immer gleich bleiben wird.
 Ein Beispiel hierfür ist der bekannte Taschenrechner, der bei wahrscheinlich jeder Windowsanwendung mitgeliefert wird, siehe Abbildung \ref{calc}.
 \bild{0.5}{MVVM/calc.png}{Windows-Taschenrechner als Beispiel einer gleichbleibenden Benut-zeroberfläche}{calc}
 \newline
 \ 
 \newline
 Jedoch ist die Welt bekanntlich nicht immer so einfach wie bei obigen Beispiel. 
-Benutzeroberflächen sind oftmals die ersten Komponenten einer Anwendung, die den Missgefallen des Endkunden erlangen.
+Benutzeroberflächen sind oftmals die ersten Komponenten einer Anwendung, die dem Missfallen des Endkunden unterliegen.
 Grund hierfür ist das allgemeine Desinteresse und meist sogar Unvermögen von Softwareentwicklern optisch reizvolle Benutzeroberflächen zu entwickeln.
 Dies ist sicherlich verständlich, schließlich hat ein Entwickler genug andere Baustellen um seine Anwendung zum Laufen zu bringen.
 Es macht daher Sinn, die Designarbeit an den für Design begabten Designer auszulagern. 
 Jedoch versteht dieser in der Regel nicht, was dem Entwickler besonders liegt.
-Eine Möglichkeit dem Standarddesigner ohne Programmierkenntnisse die Entwicklung der Benutzeroberfläche zu ermöglichen, ohne den Entwickler damit zu "'belästigen"' ist daher nötig.
-Hierfür ist jedoch eine Entkopplung der UI-Logik, die dem Entwickler obliegen muss von dem Design der Nutzeroberfläche nötig.
+Eine Möglichkeit dem Standarddesigner ohne Programmierkenntnisse die Entwicklung der Benutzeroberfläche zu ermöglichen, ohne den Entwickler damit zu "'belästigen"' ist daher wünschenswert.
+Hierfür ist jedoch eine Entkopplung der UI-Logik, die dem Entwickler obliegen muss von dem Design der Benutzeroberfläche nötig.
 
 
 \newpage
@@ -60,15 +60,15 @@ Hierfür ist jedoch eine Entkopplung der UI-Logik, die dem Entwickler obliegen mu
 
 \section{Lösung mit MVVM und WPF}
 Eine Lösung des Problems kann durch den Einsatz des MVVM-Entwurfsmusters in Verbindung mit WPF von Microsoft erreicht werden.
-Bei der \ac{WPF} handelt es sich um ein auf dem .NET-Framework von Microsoft basierenden GUI-Framework, als moderne alternative zu Winforms. 
+Bei der WPF handelt es sich um ein auf dem .NET-Framework von Microsoft basierenden GUI-Framework, als moderne alternative zu Winforms. 
 Mehr zu WPF am Ende des Abschnittes.
 In Abbildung \ref{mvvm} sind die Schichten des MVVM in Verbindung mit der WPF dargestellt.
 
-\bild{0.6}{MVVM/MVVM.png}{Die Schichten des MVVM-Entwufsmusters in Verbindung mit der WPF}{mvvm}
+\bild{0.6}{MVVM/MVVM.png}{Die Schichten des MVVM-Entwurfsmusters in Verbindung mit der WPF}{mvvm}
 \subsection{Databinding}
 
-Um MVVM und die WPF auszureizen wird sog. DataBinding verwendet. Hierbei wird
-die gewünschte Eigenschaft der View an die entsprechende Eigenschaft des ViewModels “gebunden“,
+Um MVVM und die WPF auszureizen wird sog. Databinding verwendet. Hierbei wird
+die gewünschte Eigenschaft der View an die entsprechende Eigenschaft des ViewModels “'gebunden“',
 wobei Änderungen auf der einen Seite auch auf der anderen Seite sichtbar werden (Abb. \ref{datcont}.
 Dafür wird im ViewModel das Interface INotifyPropertyChanged implementiert welches ein
 PropertyChangedEvent werfen kann sobald sich der Wert einer Eigenschaft ändert. Dadurch
@@ -76,9 +76,9 @@ bekommt die View mit wenn sich am ViewModel etwas ändert. Das DataBinding kann d
 die Werte OneTime, OneWay, TwoWay annehmen, wobei meist letzteres zum Einsatz kommt
 um Änderungen an der Oberfläche wieder an das ViewModel zurückzugeben. Im Projekt erbt
 jedes ViewModel von einer Basisklasse welche diese und andere für die Oberfläche nützliche
-Eigenschaften schon bereitstellt. In Lising \ref{binding} ist das Einbinden eines PropertyChangedEventHandler in C\# zu sehen.
+Eigenschaften schon bereitstellt. In Listing \ref{binding} ist das Einbinden eines PropertyChangedEventHandler in C\# zu sehen.
 \quellcode{Binding mittels PropertyChangedEventHandler im ViewModel}{binding}{c}{chapter/ViewModel.cs}
-\bild{0.6}{MVVM/binding.png}{Schema des Binding des DataContext an Properties der Viewmodel}{datcont}
+\bild{0.6}{MVVM/binding.png}{Das Binding eines Datacontext an Properties der Viewmodel als Schema}{datcont}
 \subsection{Commandkonzept}
 Moderne Benutzeroberflächen bieten meist verschiedene Möglichkeiten, eine Operation durchzuführen.
 Wenn Sie beispielsweise in Microsoft Word ein vorhandenes Dokument öffnen wollen, können Sie entweder die Menükombination Datei \/Öffnen oder die
@@ -95,28 +95,27 @@ Listing \ref{command} zeigt eine Klasse, die das Interface ICommand einbezieht u
 \quellcode{Erstellung von Actioncommand}{command}{c}{chapter/command.cs}
 
 \subsection{XAML}
-Ein weiterer Vorteil moderner Guikonzepte wie der WPF sind die Verwendung von Deklarationssprachen zur Beschreibung der Benutzeroberflächen.
-In WPF wird die View standardmäßig mittels der Deklarationssprache \ac{XAML} erstellt. Diese ist wie der Name bereits impliziert an XML angelehnt.
+Ein weiterer Vorteil moderner GUI-Konzepte wie der WPF sind die Verwendung von Deklarationssprachen zur Beschreibung der Benutzeroberflächen.
+In WPF wird die View standardmäßig mittels der Deklarationssprache XAML erstellt. Diese ist wie der Name bereits impliziert an XML angelehnt.
 Der Designer der Benutzeroberfläche kann somit alleine mit der Kenntnis von XAML eine View designen und benötigt keine Programmierkenntnisse.
 In Listing \ref{BeispielXAML} ist der XAML-Code eines einfachen Formulars mit zwei Ausgabefeldern und zwei Steuerbuttons zu sehen. 
 In Abbildung \ref{BeispielXAMLbild} ist die Ausgabe dazu zu sehen.
 \quellcode{Beispielcode einer einfachen auf XAML basierenden Benutzeroberfläche}{BeispielXAML}{xml}{chapter/xaml.xml}
 \bild{0.5}{MVVM/AusgabeXML.png}{Beispiel einer mittels XAML erstellten Benutzeroberfläche}{BeispielXAMLbild}
 \subsection{Allgemeine Eigenschaften der WPF}
-Um das Kapitel abzurunden sollen weitere Eigenschaften einer \ac{WPF}-Anwendung im Überblick aufgelistet sein:
+Um das Kapitel abzurunden sollen weitere Eigenschaften einer WPF-Anwendung im Überblick aufgelistet sein:
 \begin{itemize}
-\item Design mit der Auszeichnungssprache \ac{XAML}, alternativ auch ausprogrammiert möglich.
+\item Design mit der Auszeichnungssprache XAML, alternativ auch ausprogrammiert möglich.
 \item Unterstützung von 2D und 3D Grafiken
 \item Die Ausgabe ist vektorbasiert anstatt pixelbasiert. Daraus erfolgt eine bessere Skalierbarkeit der Bildschirmausgabe.
 \item Vielfältige Datenbindungsmöglichkeiten
-\item Einsatz des DirectX Bibliothek
-\item Rendern und Grafikberechnung auf der GPU anstatt \ac{CPU}
+\item Nutzung von DirectX
+\item Rendern und Grafikberechnung auf der GPU anstatt CPU
 \end{itemize}
-Um in die Materia WPF und MVVM tiefer einzudringen sind folgende Bücher zu empfehlen: \cite{hube12}, \cite{schw2008mic} und \cite{geir12}.
+Um in die Materie WPF und MVVM tiefer einzudringen sind folgende Bücher zu empfehlen: \cite{hube12}, \cite{schw2008mic} und \cite{geir12}.
 \newline
 Nützliche Software zur Erstellung eines optisch hervorragenden Benutzeroberfläche ist neben dem im Visual Studio mitgelieferten Designer auch die von Microsoft angebotene Blend Express, das standardmäßig ab Visual Studio 2012 Express ebenfalls mit ausgeliefert wird.
 \newpage
-
 \section{Fazit}
 Das Binding bewirkt eine starke Entkopplung von View und ViewModel, die durch die Verwendung des Commandkonzepts im Vergleich zum Eventkonzept weiter verstärkt wird.
 Eine gewisse Modularität wird durch die strikte Trennung von UI und UI-Logik bewirkt, als Folge davon steigt die Wartbarkeit der Anwendung.
